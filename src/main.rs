@@ -10,7 +10,7 @@ use read::*;
 use replace::*;
 use write::*;
 
-pub fn traitement(fic:&str,search_str:&str,replace_str:&str,only_first:bool,keep_old:bool,after:bool){
+pub fn traitement(fic:&str,search_str:&str,replace_str:&str,only_first:bool,keep_old:bool,after:bool,exact_cmp:bool){
     let mut fic_out = String::from(fic);
     fic_out.push_str(".chg");
 
@@ -19,7 +19,7 @@ pub fn traitement(fic:&str,search_str:&str,replace_str:&str,only_first:bool,keep
     let (to_write, from_search) = channel();
 
     let hread = start_thread_read(to_search,fic);
-    let hsearch = start_thread_search(from_read,to_write,search_str,replace_str,only_first,after);
+    let hsearch = start_thread_search(from_read,to_write,search_str,replace_str,only_first,after,exact_cmp);
     let hwrite = start_thread_write(from_search,&fic_out);
 
     //wait for threads to stop
@@ -53,5 +53,5 @@ pub fn traitement(fic:&str,search_str:&str,replace_str:&str,only_first:bool,keep
 fn main() {
     println!("Search and replace 1.0 (2020)");
     let param = Paramcli::new();
-    traitement(&param.file,&param.search,&param.replace,param.only_first,param.keep_old,param.after);
+    traitement(&param.file,&param.search,&param.replace,param.only_first,param.keep_old,param.after,param.exact_cmp);
 }

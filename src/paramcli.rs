@@ -10,7 +10,8 @@ pub struct Paramcli
     pub file: String,
     pub only_first: bool,
     pub keep_old: bool,
-    pub after:bool
+    pub after:bool,
+    pub exact_cmp:bool
 }
 
 impl Paramcli {
@@ -20,6 +21,7 @@ impl Paramcli {
         let mut replace = String::new();
         let mut only_first = false;
         let mut after = false;
+        let mut exact_cmp=false;
         let mut keep_old = false;
         let mut replace_param=false;
 
@@ -60,7 +62,11 @@ impl Paramcli {
             if get_param(&arg,String::from("/after")).is_some(){
                 after = true;
                 continue;
-            }            
+            }  
+            if get_param(&arg,String::from("/exact_cmp")).is_some(){
+                exact_cmp = true;
+                continue;
+            }  
         }
         //checks
         if fic.is_empty() {
@@ -94,7 +100,8 @@ impl Paramcli {
             file: fic,
             only_first,
             keep_old,
-            after
+            after,
+            exact_cmp
         }
     }
 }
@@ -108,7 +115,7 @@ fn get_param(arg: &str,switch :String)->Option<String>{
 }
 
 fn help(name:&str) {
-    println!("syntax : {} /search:search_string /replace:replace_string /fic:file [/only_first] [/keep_old] [/after]",name);
+    println!("syntax : {} /search:search_string /replace:replace_string /fic:file [/only_first] [/keep_old] [/after] [/exact_cmp]",name);
     println!("paramerters between [] are optionnals");
     println!("------------------------------------");
     println!("search_string: String to find ");
@@ -117,5 +124,6 @@ fn help(name:&str) {
     println!("/only_first: if search_string if found many times, only the first one is replaced");
     println!("/keep_old: do a .old copy of original file");
     println!("/after: if set the line is put after the one containing search_string");
+    println!("/exact_cmp: search a line exactly equals to seach_string (if not set a line containing search_string is enought");
     std::process::exit(0);
 }
