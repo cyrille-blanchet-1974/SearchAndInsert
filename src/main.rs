@@ -51,7 +51,7 @@ pub fn traitement(fic:&str,search_str:&str,replace_str:&str,only_first:bool,keep
 }
 
 fn main() {
-    println!("Search and replace 1.0 (2020)");
+    println!("Search and insert 1.0 (2020)");
     let param = Paramcli::new();
     traitement(&param.file,&param.search,&param.replace,param.only_first,param.keep_old,param.after,param.exact_cmp);
 }

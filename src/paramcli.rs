@@ -26,7 +26,7 @@ impl Paramcli {
         let mut replace_param=false;
 
         let args: Vec<String> = env::args().skip(1).collect();
-        let name = env::args().take(1).next().unwrap_or_else(||String::from("search_and_replace"));
+        let name = env::args().take(1).next().unwrap_or_else(||String::from("search_and_insert"));
         if args.is_empty() {
             help(&name);
         }
