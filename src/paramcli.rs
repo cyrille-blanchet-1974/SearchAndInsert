@@ -14,6 +14,12 @@ pub struct Paramcli
     pub exact_cmp:bool
 }
 
+impl Default for Paramcli {
+    fn default() -> Self {
+        Paramcli::new()
+    }
+}
+
 impl Paramcli {
     pub fn new() -> Paramcli {
         let mut fic = String::new();
