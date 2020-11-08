@@ -59,7 +59,6 @@ pub fn traitement(p: &Paramcli) {
 }
 
 fn main() {
-    println!("Search and insert 1.0 (2020)");
     let param = Paramcli::new();
     traitement(&param);
 }
